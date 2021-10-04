@@ -1,12 +1,11 @@
-from django.test import TestCase
-
-from accounts.admin import UserAdmin
+from django.test import TestCase, Client
 
 
-class UserAdminTest(TestCase):
-    def test_credentials_section(self):
-        title = UserAdmin.fieldsets[0][0]
-        self.assertIsNone(title)
-        fields = list(UserAdmin.fieldsets[0][1].get('fields'))
-        expected_fields = ['username', 'password']
-        self.assertListEqual(fields, expected_fields)
+class AboutUsTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_url_works_fine(self):
+        response = self.client.get('/about-us/')
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, "نیکوکاران و اعضای خیریه‌ها")

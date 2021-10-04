@@ -30,3 +30,6 @@ class User(AbstractUser):
 #     last_name = models.CharField(blank=True,null=True,max_length=50)
 #     password = models.CharField(User,max_length=50)
 #     username = models.CharField(AbstractUser,max_length=50)
+
+    def get_full_name(self):
+        return "{} {}".format(User.first_name, User.last_name)
